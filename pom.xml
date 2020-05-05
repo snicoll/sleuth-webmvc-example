@@ -18,8 +18,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <spring-boot.version>2.2.6.RELEASE</spring-boot.version>
+    <spring-boot.version>2.3.0.RC1</spring-boot.version>
     <sleuth.version>2.2.2.RELEASE</sleuth.version>
+    <wavefront.version>2.0.0-RC1</wavefront.version>
   </properties>
 
   <dependencies>
@@ -28,13 +29,13 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>com.wavefront</groupId>
+      <artifactId>wavefront-spring-boot-starter</artifactId>
     </dependency>
-    <!-- Sends trace data to zipkin over http (defaults to http://localhost:9411/api/v2/spans) -->
+
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-zipkin</artifactId>
+      <artifactId>spring-cloud-starter-sleuth</artifactId>
     </dependency>
   </dependencies>
 
@@ -52,6 +53,13 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
         <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.wavefront</groupId>
+        <artifactId>wavefront-spring-boot-bom</artifactId>
+        <version>${wavefront.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -79,4 +87,25 @@
       </plugin>
     </plugins>
   </build>
+
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
